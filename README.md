@@ -16,7 +16,7 @@ Deployed site: https://.github.io/Plot.lyChallenge/
  
  * `otu_labels` as the hovertext for the chart.
  
- ![bar Chart](Images/hw01.png)
+ ![bar Chart](images/hw01.png)
    
 3. Created a bubble chart that displays each sample.
 
@@ -30,19 +30,19 @@ Deployed site: https://.github.io/Plot.lyChallenge/
 
 * `otu_labels` for the text values.
 
-![Bubble Chart](Images/bubble_chart.png)
+![Bubble Chart](images/bubble_chart.png)
 
 4. A box is created to display the sample metadata, i.e., an individual's demographic information.
 
-![hw](Images/hw03.png)
+![hw](images/hw03.png)
 
 5. An interactive dashboard is created that updates all of the plots any time that a new sample is selected.
 
-![hw](Images/hw02.png)
+![hw](images/hw02.png)
 
 ## Bonus Challenge Assignment
 A Gauge Chart is created to plot the weekly washing frequency of the individual.
 
-![Weekly Washing Frequency Gauge](Images/gauge.png)
+![Weekly Washing Frequency Gauge](images/gauge.png)
 
  
