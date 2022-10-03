@@ -2,7 +2,7 @@
 // populating dropdown with the given data
 function init() {
     var dropdown = d3.select("#selDataset");
-    print("inside init")
+    // print("inside init")
     d3.json("samples.json").then((samplesData) => {
         samplesData.names.forEach((sample) => {
             dropdown.append("option").text(sample).property("value", sample);
