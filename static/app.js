@@ -2,7 +2,7 @@
 // populating dropdown with the given data
 function init() {
     var dropdown = d3.select("#selDataset");
-
+    print("inside init")
     d3.json("samples.json").then((samplesData) => {
         samplesData.names.forEach((sample) => {
             dropdown.append("option").text(sample).property("value", sample);
@@ -54,3 +54,61 @@ function buildBarPlot(SelectedsampleID) {
   })
 
 }
+
+
+function buildBubblePlot(SelectedsampleID) {
+
+    d3.json("samples.json").then(function(data) {
+            var DataNeeded = data.samples.filter(object =>object.id.toString() == SelectedsampleID)[0];
+            //console.log(DataNeeded);
+
+             // Create the Trace
+            var trace = {
+                x : DataNeeded.otu_ids,
+                y : DataNeeded.sample_values,
+                text: DataNeeded.otu_labels,
+                mode: 'markers',
+                marker: {
+                    size: DataNeeded.sample_values,
+                    color: DataNeeded.otu_ids,
+                }
+            };
+
+            // Create the data array for the plot
+            var data = [trace];
+
+            // Define the plot layout
+            var layout = {
+                xaxis:{title: "OTU ID"},
+                showlegend: false,
+                height: 600,
+                width: 1200
+              };
+              
+            // Plot the chart to a div tag with id "bubble"
+            Plotly.newPlot("bubble", data, layout);
+  })
+}
+
+function IndividualInfo(SelectedsampleID) { 
+    // Display metadata and retrieve panel
+    var dataPanel = d3.select("#sample-metadata");
+    
+    // Clear panel data
+    dataPanel.html("");
+
+    // Store into variable and console log
+    d3.json("samples.json").then(function(data) {
+        var DataNeeded = data.metadata.filter(object =>object.id.toString() == SelectedsampleID)[0];
+        console.log(DataNeeded);
+
+    // Display key-value pair from metadata
+    Object.entries(DataNeeded).forEach(([key, value]) => {
+        dataPanel.append("h6").text(`${key}: ${value}`);
+    });
+
+})
+
+}
+
+init();
