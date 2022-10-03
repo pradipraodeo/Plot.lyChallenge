@@ -111,4 +111,61 @@ function IndividualInfo(SelectedsampleID) {
 
 }
 
+//BONUS
+function buildGaugePlot(SelectedsampleID) {
+    d3.json("samples.json").then(function(data) {
+        var sample_metadata = data.metadata.filter(object =>object.id.toString() == SelectedsampleID)[0];
+        var DataNeeded = sample_metadata.wfreq;
+        console.log(DataNeeded);
+
+       // Create the Trace
+       var trace = 
+        {
+            domain: { x: [0, 9], y: [0, 9] },
+            value: DataNeeded,
+            title: {text:"<b>Belly Button Washing Frequency</b> <br>Scrubs per week</br>",
+                    font: { size: 20}},
+            type: "indicator",
+            mode: "gauge+number+delta",
+            delta: { reference: 9, increasing: { color: "RebeccaPurple" } },
+            gauge: {
+                axis: { range: [0, 9], tickwidth: 2, tickcolor: "blue" },
+                bar: { color: "darkblue" },
+                bgcolor: "white",
+                borderwidth: 2,
+                bordercolor: "black",
+                steps: [
+                    { range: [0, 1], color: "cyan"},
+                    { range: [1, 2], color: "cyan" },
+                    { range: [2, 3], color: "cyan" },
+                    { range: [3, 4], color: "cyan" },
+                    { range: [4, 5], color: "cyan"},
+                    { range: [5, 6], color: "royalblue"},
+                    { range: [6, 7], color: "royalblue" },
+                    { range: [7, 8], color: "royalblue"},
+                    { range: [8, 9], color: "royalblue" }
+                  ],
+                  threshold: {
+                    line: { color: "red", width: 4 },
+                    thickness: 0.75,
+                    value: 8
+                  }
+            
+            }
+        };
+
+        // Create the data array for the plot
+        var data = [trace];
+
+        // Define the plot layout
+        var layout = { width: 600, 
+                       height: 500, 
+                       margin: { t: 25, r: 25, l: 25, b: 25 },
+                       font: { color: "darkblue", family: "Arial" }
+                    };
+        // Plot the chart to a div tag with id "gauge"
+        Plotly.newPlot('gauge', data, layout);
+    }
+)};
+
 init();
